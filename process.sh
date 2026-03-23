@@ -43,3 +43,10 @@ elif [ -f "$input_path" ]; then
 else
     echo "Error: $input_path is neither a valid file nor a directory."
 fi
+
+# After processing all files, merge the resulting .txt files
+
+# After processing all files, merge the resulting .txt files
+echo "Merging all processed text files in $input_path..."
+
+./merge-text.sh "$input_path" 

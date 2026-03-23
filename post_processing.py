@@ -41,6 +41,23 @@ with open(sys.argv[1], 'r') as file:
 import re
 content = re.sub(r'-\s*\n\s*', '', content)
 
+# Remove spurious line breaks (unwrap text)
+content = content.replace('\n', ' ')
+
+# Normalize quotes and dashes
+replacements = {
+    '’': "'",
+    '‘': "'",
+    '“': '"',
+    '”': '"',
+    '–': '-',  # en dash
+    '—': '-',  # em dash
+    '…': '...', 
+    '  ': ' ',  # double space with single space
+}
+for old, new in replacements.items():
+    content = content.replace(old, new)
+    
 # Step 1: Remove unwanted strings
 content = remove_unwanted_strings(content)
 

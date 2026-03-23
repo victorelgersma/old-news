@@ -1,2 +1,3 @@
 
+- [ ] Split up the tesseract step from the cleaning step - i.e save the result from the tesseractification somewhere, and then do post_processing on these text files only. This should dramatically speed up my process
 - [ ] Edinburgh review of Vestiges

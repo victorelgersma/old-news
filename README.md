@@ -1,5 +1,7 @@
 # newspaper-time-machine
 
+Tesseract does not pick up on paragraph breaks so these ill need to re-add.
+
 https://britishnewspaperarchive.co.uk/viewer/bl/0000060/18450804/021/0004
 
 Turn all the images into text at img/text/1844/mercury similarly named: 
