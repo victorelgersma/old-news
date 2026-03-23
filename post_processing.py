@@ -27,7 +27,7 @@ def load_filename_specific_corrections(corrections_file):
 # Remove unwanted strings (we'll define a list of strings to remove)
 def remove_unwanted_strings(text):
     unwanted_strings = [
-        "© "  # Remove unwanted characters like copyright symbols, etc.
+        "© ", "|"  # Remove unwanted characters like copyright symbols, etc.
     ]
     for unwanted in unwanted_strings:
         text = text.replace(unwanted, '')
