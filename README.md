@@ -1,5 +1,15 @@
 # newspaper-time-machine
 
+0. set working directory
+1. rename screenshots
+2. run tesseract 
+3. run ocr
+4. run merge
+5. now I can copy this file for a final edit
+6. Use LLM for the final edit
+7. Publish to HTML
+8. Deploy
+
 ## First remove all spaces from filenames
 
 ```

@@ -53,7 +53,6 @@ replacements = {
     '–': '-',  # en dash
     '—': '-',  # em dash
     '…': '...', 
-    '  ': ' ',  # double space with single space
 }
 for old, new in replacements.items():
     content = content.replace(old, new)

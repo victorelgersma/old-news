@@ -19,12 +19,9 @@ if [ -d "$input_path" ]; then
             output_file="$input_dir/${base_filename}.tesseract"
 
             # Uncomment to run Run Tesseract OCR
-#            tesseract "$input_file" $output_file
+            tesseract --oem 1 --psm 4 "$input_file" $output_file
 
-            # Post-processing
-            python3 post_processing.py "${output_file}.txt" > "$input_dir/${base_filename}.processed.txt"
-
-            echo "Processing complete. Output saved to $output_file"
+            echo "Processing complete. Output saved to $output_file.txt"
         fi
     done
 else
