@@ -13,7 +13,7 @@ fi
 > "$output_file"
 
 # Concatenate all .txt files in the directory, sorted alphabetically, safely
-find "$dir" -maxdepth 1 -type f -name "*.txt" | sort | while IFS= read -r f; do
+find "$dir" -maxdepth 1 -type f -name "*.processed.txt" | sort | while IFS= read -r f; do
     cat "$f" >> "$output_file"
     echo "" >> "$output_file"  # optional newline between files
 done

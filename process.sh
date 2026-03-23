@@ -2,6 +2,7 @@
 
 # Usage: ./process.sh <input_image_file_or_directory>
 
+
 input_path="$1"
 
 if [ -d "$input_path" ]; then
@@ -15,38 +16,17 @@ if [ -d "$input_path" ]; then
             base_filename=$(basename "$input_file" .png)
 
             # Output next to original image
-            output_file="$input_dir/${base_filename}.txt"
+            output_file="$input_dir/${base_filename}.tesseract"
 
-            # Run Tesseract OCR
-            tesseract "$input_file" tmp
+            # Uncomment to run Run Tesseract OCR
+#            tesseract "$input_file" $output_file
 
             # Post-processing
-            python3 post_processing.py tmp.txt > "$output_file"
-
-            rm tmp.txt
+            python3 post_processing.py "${output_file}.txt" > "$input_dir/${base_filename}.processed.txt"
 
             echo "Processing complete. Output saved to $output_file"
         fi
     done
-elif [ -f "$input_path" ]; then
-    echo "Input is a file. Processing: $input_path"
-
-    input_dir=$(dirname "$input_path")
-    base_filename=$(basename "$input_path" .png)
-    output_file="$input_dir/${base_filename}.txt"
-
-    tesseract "$input_path" tmp
-    python3 post_processing.py tmp.txt > "$output_file"
-    rm tmp.txt
-
-    echo "Processing complete. Output saved to $output_file"
 else
-    echo "Error: $input_path is neither a valid file nor a directory."
+    echo "Error: $input_path is not a valid directory."
 fi
-
-# After processing all files, merge the resulting .txt files
-
-# After processing all files, merge the resulting .txt files
-echo "Merging all processed text files in $input_path..."
-
-./merge-text.sh "$input_path" 

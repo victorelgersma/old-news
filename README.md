@@ -1,6 +1,12 @@
 # newspaper-time-machine
 
-Tesseract does not pick up on paragraph breaks so these ill need to re-add.
+## First remove all spaces from filenames
+
+```
+python3 remove_spaces_from_filenames.sh
+```
+
+Tesseract does not pick up on paragraph breaks so these ill need to re-added
 
 https://britishnewspaperarchive.co.uk/viewer/bl/0000060/18450804/021/0004
 
