@@ -1,39 +1,45 @@
 <?php
 // homepage.php
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 $newspapers = [
   [
     "title" => "The Edinburgh Review and the Vestiges of the Natural History of Creation",
     "year" => 1844,
     "month" => 10,
     "newspaper" => "Liverpool Mercury",
-    "url" => "1844/mercury/",
-    "link_original",
+    "url" => "1844/mercury/"
   ],
   [
     "newspaper" => "Edinburgh Evening Post and Scottish Standard",
     "title" => "Vestiges of the Natural History of Creation",
     "url" => "1846/01/edinburgh",
     "year" => 1846,
-    "month" => 01
-  ]
-
-  // Add more newspapers here:
-  // [
-  //     "title" => "Another Newspaper Title",
-  //     "url" => "path/to/newspaper/"
-  // ],
+    "month" => 1
+  ],
 ];
+
+// Optional: sort newest first
+usort($newspapers, fn($a, $b) =>
+    ($b['year'] ?? 0) <=> ($a['year'] ?? 0)
+    ?: ($b['month'] ?? 0) <=> ($a['month'] ?? 0)
+);
 ?>
 
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Old News</title>
-  <link rel="stylesheet" type="text/css" href="style/tufte.min.css">
+  <link rel="stylesheet" href="style/tufte.min.css">
+  <style>
+    ul { list-style: none; padding: 0; }
+    li { margin-bottom: 1.6em; }
+    .meta { font-size: 0.9em; color: #555; }
+  </style>
 </head>
 
 <body>
@@ -43,11 +49,23 @@ $newspapers = [
   <ul>
     <?php foreach ($newspapers as $paper): ?>
       <li>
-        <p><a href="<?php echo htmlspecialchars($paper['url']); ?>"><?php echo htmlspecialchars($paper['title']); ?></a>
+        <p>
+          <a href="<?= htmlspecialchars($paper['url'] ?? '#') ?>">
+            <?= htmlspecialchars($paper['title'] ?? 'Untitled') ?>
+          </a><br>
+
+          <span class="meta">
+            <?= htmlspecialchars($paper['newspaper'] ?? 'Unknown paper') ?>
+            —
+            <?= htmlspecialchars($paper['year'] ?? '?') ?>
+            <?php if (!empty($paper['month'])): ?>
+              (<?= str_pad($paper['month'], 2, '0', STR_PAD_LEFT) ?>)
+            <?php endif; ?>
+          </span>
         </p>
       </li>
     <?php endforeach; ?>
   </ul>
-</body>
 
+</body>
 </html>

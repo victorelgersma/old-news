@@ -3,7 +3,7 @@ $title = "The Vestiges of the Natural History of Creation";
 $date = "10 January 1846";
 $links = [
     "Home" => "/",
-    "Link to original" => "",
+    "Link to original" => "https://www.britishnewspaperarchive.co.uk/viewer/bl/0001177/18460110/033/0003",
     "View photos" => "./photos"
 ];
 $headerPartial = __DIR__ . '/../../../partials/newspaper-header.php';
