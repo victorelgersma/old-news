@@ -3,9 +3,21 @@
 
 $newspapers = [
   [
-    "title" => "Mercury, 1844 'Review of Review of Vestiges'",
-    "url" => "1844/mercury/"
+    "title" => "The Edinburgh Review and the Vestiges of the Natural History of Creation",
+    "year" => 1844,
+    "month" => 10,
+    "newspaper" => "Liverpool Mercury",
+    "url" => "1844/mercury/",
+    "link_original",
   ],
+  [
+    "newspaper" => "Edinburgh Evening Post and Scottish Standard",
+    "title" => "Vestiges of the Natural History of Creation",
+    "url" => "1846/01/edinburgh",
+    "year" => 1846,
+    "month" => 01
+  ]
+
   // Add more newspapers here:
   // [
   //     "title" => "Another Newspaper Title",
