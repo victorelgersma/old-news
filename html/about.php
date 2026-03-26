@@ -13,7 +13,7 @@
         <h1>About</h1>
         <section>
             <p>
-            Welcome to Old News, a worker-led cooperative that resurrects old newspaper from the crusty confines of scanned photocopies, and makes them accessible to 21st century creatures like yourself.
+            Welcome. We resurrect interesting old newspaper articles from the crusty confines of scanned photocopies, and add useful margin notes to make them accessible to 21st century critters. 
             </p>
             <p>Old news is open-source. Check us out on <a href="https://github.com/victorelgersma/old-news-">github</a></p>
         </section>
