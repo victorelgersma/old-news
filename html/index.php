@@ -7,10 +7,17 @@ ini_set('display_errors', 1);
 $newspapers = [
   [
     "title" => "The Edinburgh Review and the Vestiges of the Natural History of Creation",
-    "year" => 1844,
+    "year" => 1845,
     "month" => 10,
     "newspaper" => "Liverpool Mercury",
-    "url" => "1844/10/mercury/"
+    "url" => "1845/10/mercury/"
+  ],
+  [
+    "title" => "Mercury Extraordinary",
+    "year" => 1845,
+    "month" => 10,
+    "newspaper" => "Liverpool Mercury",
+    "url" => "1845/10/mercury/readership"
   ],
   [
     "newspaper" => "Edinburgh Evening Post and Scottish Standard",

@@ -1,6 +1,6 @@
 <?php
-$photo_dir = '/var/www/vjbe.net/html/oldnews-photos/1844/10/liverpool_mercury';
-$photo_url_base = 'https://vjbe.net/oldnews-photos/1844/10/liverpool_mercury';
+$photo_dir = '/var/www/vjbe.net/html/oldnews-photos/1845/10/liverpool_mercury/readership';
+$photo_url_base = 'https://vjbe.net/oldnews-photos/1845/10/liverpool_mercury/readership';
 
 $images = glob($photo_dir . '/*.{jpg,jpeg,png,gif,webp}', GLOB_BRACE);
 ?>
@@ -18,7 +18,7 @@ $images = glob($photo_dir . '/*.{jpg,jpeg,png,gif,webp}', GLOB_BRACE);
 </head>
 <body>
 
-<?php include __DIR__ . '/../../../../partials/gallery.php'; ?>
+<?php include __DIR__ . '/../../../../../partials/gallery.php'; ?>
 
 </body>
 </html>

@@ -15,11 +15,9 @@
             <p>
             Welcome to Old News, a worker-led cooperative that resurrects old newspaper from the crusty confines of scanned photocopies, and makes them accessible to 21st century creatures like yourself.
             </p>
+            <p>Old news is open-source. Check us out on <a href="https://github.com/victorelgersma/old-news-">github</a></p>
         </section>
         <section>
-            <h2>Ways of Working</h2>
-            <img src="keaton_blacksmith.png" width="200px"/>
-            <p>We take contributions. Coming Soon</p>
         </section>
     </article>
     
