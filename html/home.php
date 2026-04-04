@@ -38,6 +38,7 @@
         <footer>
             <hr>
             <p>Archive by Victor Elgersma</p>
+            <p>View this project on <a href="https://github.com/victorelgersma/old-news">Github</a></p>
         </footer>
     </article>
 </body>
