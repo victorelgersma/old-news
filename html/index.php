@@ -1,78 +1,49 @@
 <?php
-// homepage.php
+// index.php
+require_once('data.php');
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+$request_uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$clean_uri = ltrim(preg_replace('/^\/oldnews\//', '', $request_uri), '/');
 
-$newspapers = [
-  [
-    "title" => "The Edinburgh Review and the Vestiges of the Natural History of Creation",
-    "year" => 1845,
-    "month" => 10,
-    "newspaper" => "Liverpool Mercury",
-    "url" => "1845/10/mercury/"
-  ],
-  [
-    "title" => "Mercury Extraordinary",
-    "year" => 1845,
-    "month" => 10,
-    "newspaper" => "Liverpool Mercury",
-    "url" => "1845/10/mercury/readership"
-  ],
-  [
-    "newspaper" => "Edinburgh Evening Post and Scottish Standard",
-    "title" => "Vestiges of the Natural History of Creation",
-    "url" => "1846/01/edinburgh",
-    "year" => 1846,
-    "month" => 1
-  ],
-];
+if ($clean_uri == "" || $clean_uri == "index.php") {
+    render_home();
+    exit;
+}
 
-// Optional: sort newest first
-usort($newspapers, fn($a, $b) =>
-    ($b['year'] ?? 0) <=> ($a['year'] ?? 0)
-    ?: ($b['month'] ?? 0) <=> ($a['month'] ?? 0)
-);
-?>
+$target_file = $articles_base . '/' . $clean_uri;
 
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Old News</title>
-  <link rel="stylesheet" href="style/tufte.min.css">
-  <style>
-    ul { list-style: none; padding: 0; }
-    li { margin-bottom: 1.6em; }
-    .meta { font-size: 0.9em; color: #555; }
-  </style>
-</head>
+if (file_exists($target_file) && is_file($target_file)) {
+    render_article($clean_uri, $target_file);
+} else {
+    header("HTTP/1.0 404 Not Found");
+    render_404();
+}
 
-<body>
-  <h1>Old News</h1>
-  <nav><a href="about.php">About</a></nav>
+function render_article($uri, $full_path) {
+    global $metadata, $publications, $photos_base;
 
-  <ul>
-    <?php foreach ($newspapers as $paper): ?>
-      <li>
-        <p>
-          <a href="<?= htmlspecialchars($paper['url'] ?? '#') ?>">
-            <?= htmlspecialchars($paper['title'] ?? 'Untitled') ?>
-          </a><br>
+    $meta = $metadata[$uri] ?? ['title' => basename($uri, '.html')];
+    $parts = explode('/', $uri);
+    
+    // Variables for layout.php
+    $title = $meta['title'];
+    $pub_key = $parts[0];
+    $pub_name = $publications[$pub_key] ?? ucfirst(str_replace('_', ' ', $pub_key));
+    $day_name = $meta['day_name'] ?? '';
+    $day_num  = $meta['day_num'] ?? '';
+    $date_str = ($parts[2] ?? '') . '/' . ($parts[1] ?? '');
+    $source_url = $meta['source_url'] ?? null;
+    $photo_link = $photos_base . '/' . str_replace('.html', '.png', $uri);
+    
+    $content = file_get_contents($full_path);
+    include('layout.php');
+}
 
-          <span class="meta">
-            <?= htmlspecialchars($paper['newspaper'] ?? 'Unknown paper') ?>
-            —
-            <?= htmlspecialchars($paper['year'] ?? '?') ?>
-            <?php if (!empty($paper['month'])): ?>
-              (<?= str_pad($paper['month'], 2, '0', STR_PAD_LEFT) ?>)
-            <?php endif; ?>
-          </span>
-        </p>
-      </li>
-    <?php endforeach; ?>
-  </ul>
+function render_home() {
+    global $site_name;
+    echo "<h1>$site_name</h1><p>Welcome. Publication list coming soon.</p>";
+}
 
-</body>
-</html>
+function render_404() {
+    echo "<h1>404 Not Found</h1><p>Article not found.</p>";
+}

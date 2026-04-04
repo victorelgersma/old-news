@@ -1,5 +1,6 @@
 
-- [ ] move html to 1844/01/mercury
+
+- [ ] create dynamic article fetching with index.php
 - [ ] create webpage for the edinburgh review
 - [ ] Split up the tesseract step from the cleaning step - i.e save the result from the tesseractification somewhere, and then do post_processing on these text files only. This should dramatically speed up my process
 - [ ] Edinburgh review of Vestiges
