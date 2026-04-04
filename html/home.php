@@ -26,7 +26,7 @@
                 <?php foreach ($links as $link): ?>
                     <li>
                         <span class="pub-tag"><?= htmlspecialchars($link['pub']) ?></span><br>
-                        <a href="/oldnews/<?= htmlspecialchars($link['uri']) ?>">
+                        <a href="/<?= htmlspecialchars($link['uri']) ?>">
                             <strong><?= htmlspecialchars($link['title']) ?></strong>
                         </a>
                         <span class="date-tag">— <?= $link['date'] ?></span>

@@ -1,2 +1,5 @@
 
 
+
+- [ ] add a switch to turn sidenotes off and on
+- [ ] create a separate step to add the sidenotes (i.e manage the sidenotes separately in a JSON array with the words that the sidenote should appear after and the sidenote itself). This should be a compilation step in the digital humanities pipeline, not here, but here there will be a little switch that allows users to turn sidenotes on and off. a

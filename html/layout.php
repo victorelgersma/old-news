@@ -20,11 +20,8 @@
                 <?= $day_name ?> <?= $day_num ?> <?= $date_str ?>
             </p>
             <nav>
-                <a href="/oldnews/">← Back to Archive</a> | 
-                <a href="<?= $photo_link ?>" target="_blank">View Photocopy</a>
-                <?php if ($source_url): ?>
-                    | <a href="<?= htmlspecialchars($source_url) ?>" target="_blank" class="source-link">British Newspaper Archive ↗</a>
-                <?php endif; ?>
+                <a href="/">← Back to Archive</a> | 
+                <a href="<?= $photo_link ?>" target="_blank">View Source</a>
             </nav>
         </header>
 

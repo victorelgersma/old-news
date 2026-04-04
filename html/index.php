@@ -3,28 +3,62 @@
 require_once('data.php');
 
 $request_uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$clean_uri = ltrim(preg_replace('/^\/oldnews\//', '', $request_uri), '/');
 
-if ($clean_uri == "" || $clean_uri == "index.php") {
+// Strip leading slash
+$clean_uri = ltrim($request_uri, '/');
+
+// Basic normalization / safety
+$clean_uri = preg_replace('/\.\.+/', '', $clean_uri);
+
+// 1. Home Route
+if ($clean_uri === "" || $clean_uri === "index.php") {
     render_home();
     exit;
 }
 
+// 2. Photocopy Viewer Route
+if (strpos($clean_uri, 'photocopy/') === 0) {
+    $uri = str_replace('photocopy/', '', $clean_uri);
+    $uri = ltrim($uri, '/');
+    $uri = preg_replace('/\.\.+/', '', $uri);
+
+    // Optional strict validation (recommended)
+    if (!isset($metadata[$uri])) {
+        http_response_code(404);
+        render_404();
+        exit;
+    }
+
+    $_GET['uri'] = $uri;
+    include('photocopy.php');
+    exit;
+}
+
+// 3. Article Route
 $target_file = $articles_base . '/' . $clean_uri;
+
+// Optional strict validation
+if (!isset($metadata[$clean_uri])) {
+    http_response_code(404);
+    render_404();
+    exit;
+}
 
 if (file_exists($target_file) && is_file($target_file)) {
     render_article($clean_uri, $target_file);
 } else {
-    header("HTTP/1.0 404 Not Found");
+    http_response_code(404);
     render_404();
 }
 
+// ------------------------
+
 function render_article($uri, $full_path) {
-    global $metadata, $publications, $photos_base;
+    global $metadata, $publications;
 
     $meta = $metadata[$uri] ?? ['title' => basename($uri, '.html')];
     $parts = explode('/', $uri);
-    
+
     // Variables for layout.php
     $title = $meta['title'];
     $pub_key = $parts[0];
@@ -33,8 +67,10 @@ function render_article($uri, $full_path) {
     $day_num  = $meta['day_num'] ?? '';
     $date_str = ($parts[2] ?? '') . '/' . ($parts[1] ?? '');
     $source_url = $meta['source_url'] ?? null;
-    $photo_link = $photos_base . '/' . str_replace('.html', '.png', $uri);
-    
+
+    // Photocopy link
+    $photo_link = "/photocopy/" . $uri;
+
     $content = file_get_contents($full_path);
     include('layout.php');
 }
@@ -43,21 +79,21 @@ function render_home() {
     global $site_name, $metadata, $publications;
 
     $links = [];
-
-    // Loop through metadata to build a list of articles
     foreach ($metadata as $uri => $meta) {
         $parts = explode('/', $uri);
         $pub_key = $parts[0];
-        
+
         $links[] = [
             'uri'   => $uri,
             'title' => $meta['title'],
             'pub'   => $publications[$pub_key] ?? $pub_key,
-            'date'  => ($parts[2] ?? '') . '/' . ($parts[1] ?? '') // e.g. 10/1845
+            'date'  => ($parts[2] ?? '') . '/' . ($parts[1] ?? '')
         ];
     }
 
-    // Load the home partial
+    // Sort newest-ish first (by URI descending)
+    usort($links, fn($a, $b) => strcmp($b['uri'], $a['uri']));
+
     include('home.php');
 }
 

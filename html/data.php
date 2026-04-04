@@ -4,7 +4,7 @@
 $site_name = "Old News Archive";
 $base_dir = "/var/www/vjbe.net/html"; 
 $articles_base = $base_dir . "/oldnews-articles-only";
-$photos_base = "https://oldnews.vjbe.net/oldnews-photos";
+$photos_base = "https://oldnews-photos.vjbe.net/";
 
 $publications = [
     'liverpool_mercury' => 'Liverpool Mercury',
