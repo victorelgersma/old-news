@@ -40,8 +40,25 @@ function render_article($uri, $full_path) {
 }
 
 function render_home() {
-    global $site_name;
-    echo "<h1>$site_name</h1><p>Welcome. Publication list coming soon.</p>";
+    global $site_name, $metadata, $publications;
+
+    $links = [];
+
+    // Loop through metadata to build a list of articles
+    foreach ($metadata as $uri => $meta) {
+        $parts = explode('/', $uri);
+        $pub_key = $parts[0];
+        
+        $links[] = [
+            'uri'   => $uri,
+            'title' => $meta['title'],
+            'pub'   => $publications[$pub_key] ?? $pub_key,
+            'date'  => ($parts[2] ?? '') . '/' . ($parts[1] ?? '') // e.g. 10/1845
+        ];
+    }
+
+    // Load the home partial
+    include('home.php');
 }
 
 function render_404() {
