@@ -1,2 +1,6 @@
 
+#!/opt/homebrew/bin/bash
+
 deploy html oldnews
+
+echo "done! visit https://oldnews.vjbe.net"

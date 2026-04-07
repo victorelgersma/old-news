@@ -24,4 +24,9 @@ $metadata = [
         'day_name' => 'Friday',
         'source_url' => "https://britishnewspaperarchive.co.uk/viewer/bl/0000081/18451017/005/0001"
     ],
+    'spectator/1837/07/nichol-s-architecture-of-the-heavens.html' => [
+        'title' => "DR. NICHOL'S ARCHITECTURE OF THE HEAVENS.",
+        'day_num' => '22',
+        'source_url' => "https://archive.spectator.co.uk/article/22nd-july-1837/17/dr-nichols-architecture-of-the-heavens"
+    ],
 ];
