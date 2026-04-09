@@ -95,18 +95,26 @@ function render_home() {
         $parts = explode('/', $uri);
         $pub_key = $parts[0];
 
+        // 1. Get the publication data if it exists
+        $pub_data = $publications[$pub_key] ?? null;
+
+        // 2. Extract the name, or fall back to a prettified version of the key
+        $display_name = $pub_data['name'] ?? ucfirst(str_replace('_', ' ', $pub_key));
+
         $links[] = [
             'uri'     => $uri,
-            'pub_key' => $pub_key, // Add this line
+            'pub_key' => $pub_key,
             'title'   => $meta['title'],
-            'pub'     => $publications[$pub_key] ?? ucfirst(str_replace('_', ' ', $pub_key)),
+            'pub'     => $display_name, // Now a string again
             'date'    => ($parts[2] ?? '') . '/' . ($parts[1] ?? '')
         ];
     }
+    
+    // Sort newest (by URI/date) first
     usort($links, fn($a, $b) => strcmp($b['uri'], $a['uri']));
+    
     include('home.php');
 }
-
 // Update this function at the bottom of index.php
 function render_404() {
     global $site_name, $publications; // Bring in globals for layout.php
@@ -158,8 +166,10 @@ function render_pending_transcription($uri) {
 function render_publication_page($pub_key) {
     global $site_name, $metadata, $publications;
 
-    $pub_name = $publications[$pub_key] ?? ucfirst(str_replace('_', ' ', $pub_key));
-    $description = "Archive of articles from " . $pub_name;
+    // Pull name and bio from the new array structure
+    $pub_info = $publications[$pub_key] ?? null;
+    $pub_name = $pub_info['name'] ?? ucfirst(str_replace('_', ' ', $pub_key));
+    $description = $pub_info['bio'] ?? "Archive of articles from " . $pub_name;
 
     $links = [];
     foreach ($metadata as $uri => $meta) {

@@ -7,19 +7,33 @@ $articles_base = $base_dir . "/oldnews-articles-only";
 $photos_base = "https://oldnews-photos.vjbe.net/";
 
 $publications = [
-    'liverpool_mercury' => 'Liverpool Mercury',
-    'manchester_guardian' => 'The Manchester Guardian',
+    'liverpool_mercury' => [
+        'name' => 'Liverpool Mercury',
+        'bio'  => 'A leading Whig-Radical provincial newspaper focusing on commerce, local politics, and the popularization of science.'
+    ],
+    'manchester_guardian' => [
+        'name' => 'The Manchester Guardian',
+        'bio'  => 'Representing the industrial North, this paper provided serious reporting on 19th-century social and scientific progress.'
+    ],
+    'spectator' => [
+        'name' => 'The Spectator',
+        'bio'  => 'An influential weekly magazine known for intellectual rigor and high-level scientific and literary criticism.'
+    ],
+    'atlas' => [
+        'name' => 'The Atlas',
+        'bio'  => 'A comprehensive London weekly renowned for its expansive literary reviews and coverage of Victorian treatises.'
+    ],
 ];
 
 $metadata = [
     'liverpool_mercury/1845/10/readership.html' => [
-        'title' => 'MERCURY EXTRAORDINARY!',
+        'title' => 'Mercury Extraordinary!',
         'day_num' => '03',
         'day_name' => 'Friday',
         'source_url' => "https://britishnewspaperarchive.co.uk/viewer/bl/0000081/18451017/005/0001"
     ],
     'liverpool_mercury/1845/10/vestiges-sedgwick-review-of-review.html' => [
-        'title' => 'THE EDINBURGH REVIEW, AND VESTIGES OF THE NATURAL CREATION',
+        'title' => 'The Edinburgh Review, and Vestiges of the Natural History of Creation',
         'day_num' => '03',
         'day_name' => 'Friday',
         'source_url' => "https://britishnewspaperarchive.co.uk/viewer/bl/0000081/18451017/005/0001"
