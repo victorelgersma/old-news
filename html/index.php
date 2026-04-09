@@ -34,6 +34,13 @@ if (strpos($clean_uri, 'photocopy/') === 0) {
     exit;
 }
 
+// --- Add this Route near your other routes in index.php ---
+if (strpos($clean_uri, 'pub/') === 0) {
+    $pub_key = str_replace('pub/', '', $clean_uri);
+    render_publication_page($pub_key);
+    exit;
+}
+
 // 3. Article Route
 $target_file = $articles_base . '/' . $clean_uri;
 
@@ -79,6 +86,7 @@ function render_article($uri, $full_path) {
     include('layout.php');
 }
 
+// --- Update render_home() to include pub_key ---
 function render_home() {
     global $site_name, $metadata, $publications;
 
@@ -88,16 +96,14 @@ function render_home() {
         $pub_key = $parts[0];
 
         $links[] = [
-            'uri'   => $uri,
-            'title' => $meta['title'],
-            'pub'   => $publications[$pub_key] ?? $pub_key,
-            'date'  => ($parts[2] ?? '') . '/' . ($parts[1] ?? '')
+            'uri'     => $uri,
+            'pub_key' => $pub_key, // Add this line
+            'title'   => $meta['title'],
+            'pub'     => $publications[$pub_key] ?? ucfirst(str_replace('_', ' ', $pub_key)),
+            'date'    => ($parts[2] ?? '') . '/' . ($parts[1] ?? '')
         ];
     }
-
-    // Sort newest-ish first (by URI descending)
     usort($links, fn($a, $b) => strcmp($b['uri'], $a['uri']));
-
     include('home.php');
 }
 
@@ -147,4 +153,24 @@ function render_pending_transcription($uri) {
     ";
 
     include('layout.php');
+}
+
+function render_publication_page($pub_key) {
+    global $site_name, $metadata, $publications;
+
+    $pub_name = $publications[$pub_key] ?? ucfirst(str_replace('_', ' ', $pub_key));
+    $description = "Archive of articles from " . $pub_name;
+
+    $links = [];
+    foreach ($metadata as $uri => $meta) {
+        if (strpos($uri, $pub_key . '/') === 0) {
+            $parts = explode('/', $uri);
+            $links[] = [
+                'uri'   => $uri,
+                'title' => $meta['title'],
+                'date'  => ($parts[2] ?? '') . '/' . ($parts[1] ?? '')
+            ];
+        }
+    }
+    include('pub.php');
 }

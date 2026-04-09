@@ -1,18 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title><?= htmlspecialchars($site_name) ?></title>
     <link rel="stylesheet" href="https://oldnews.vjbe.net/style/tufte.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body { padding: 2rem; }
-        ul { list-style-type: none; padding: 0; }
-        li { margin-bottom: 1.5rem; }
-        .pub-tag { font-variant: small-caps; color: #666; font-size: 0.9rem; }
-        .date-tag { color: #888; font-size: 0.8rem; }
+        body {
+            padding: 2rem;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 1.5rem;
+        }
+
+        .pub-tag {
+            font-variant: small-caps;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .date-tag {
+            color: #888;
+            font-size: 0.8rem;
+        }
     </style>
 </head>
+
 <body>
     <article>
         <header>
@@ -25,7 +45,9 @@
             <ul>
                 <?php foreach ($links as $link): ?>
                     <li>
-                        <span class="pub-tag"><?= htmlspecialchars($link['pub']) ?></span><br>
+                        <a href="/pub/<?= htmlspecialchars($link['pub_key']) ?>" class="pub-tag">
+                            <?= htmlspecialchars($link['pub']) ?>
+                        </a><br>
                         <a href="/<?= htmlspecialchars($link['uri']) ?>">
                             <strong><?= htmlspecialchars($link['title']) ?></strong>
                         </a>
@@ -41,4 +63,5 @@
         </footer>
     </article>
 </body>
+
 </html>
