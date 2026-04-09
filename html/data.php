@@ -35,9 +35,14 @@ $metadata = [
         "day_num" => "20",
         "source_url" => "https://www.findmypast.co.uk/image-viewer?issue=BL%2F0002115%2F18451220&page=1&fulfillmentTypeKey=4000&record-id=BL%2F0002115%2F18451220%2F006"
     ],
-    'waterford_chronicle/1846/05/vestiges-review.html' => [
+    'waterford_chronicle/1846/05/review-vestiges.html' => [
         'title' => "Vestiges of the Natural History of Creation - Avowed Infidelity",
         "day_num" => "20",
         "source_url" => "https://www.britishnewspaperarchive.co.uk/viewer/bl/0000838/18460520/005/0001"
+    ],
+    'edinburgh_evening_post_and_scottish_standard/1846/01/vestiges.html' => [
+        'title' => "Vestiges of the Natural History of Creation",
+        "day_num" => "10",
+        "source_url" => "https://www.britishnewspaperarchive.co.uk/viewer/bl/0001177/18460110/033/0003"
     ],
 ];
