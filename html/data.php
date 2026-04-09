@@ -34,5 +34,10 @@ $metadata = [
         'title' => "Review of New Books: Explanations: a Sequel to \"Vestiges of the Natural History of Creation\" By the Author of that Work. Churchill. London, 1845",
         "day_num" => "20",
         "source_url" => "https://www.findmypast.co.uk/image-viewer?issue=BL%2F0002115%2F18451220&page=1&fulfillmentTypeKey=4000&record-id=BL%2F0002115%2F18451220%2F006"
-    ]
+    ],
+    'waterford_chronicle/1846/05/vestiges-review.html' => [
+        'title' => "Vestiges of the Natural History of Creation - Avowed Infidelity",
+        "day_num" => "20",
+        "source_url" => "https://www.britishnewspaperarchive.co.uk/viewer/bl/0000838/18460520/005/0001"
+    ],
 ];
