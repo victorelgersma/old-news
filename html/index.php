@@ -63,7 +63,8 @@ function render_article($uri, $full_path) {
     $parts = explode('/', $uri);
 
     // Variables for layout.php
-    $title = $meta['title'];
+    $title = $meta['title'] ?? basename($uri, '.html');
+
     $pub_key = $parts[0];
     $pub_name = $publications[$pub_key] ?? ucfirst(str_replace('_', ' ', $pub_key));
     $day_name = $meta['day_name'] ?? '';

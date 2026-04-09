@@ -20,7 +20,6 @@
 <body>
     <article>
         <header>
-            <h1><?= htmlspecialchars($title) ?></h1>
             <p class="subtitle">
                 <?= htmlspecialchars($pub_name) ?> — 
                 <?= $day_name ?> <?= $day_num ?> <?= $date_str ?>
