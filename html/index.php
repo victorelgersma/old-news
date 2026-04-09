@@ -37,19 +37,22 @@ if (strpos($clean_uri, 'photocopy/') === 0) {
 // 3. Article Route
 $target_file = $articles_base . '/' . $clean_uri;
 
-// Optional strict validation
-if (!isset($metadata[$clean_uri])) {
-    http_response_code(404);
-    render_404();
+// Check if we have metadata for this URI
+if (isset($metadata[$clean_uri])) {
+    if (file_exists($target_file) && is_file($target_file)) {
+        // Normal Case: Transcription exists
+        render_article($clean_uri, $target_file);
+    } else {
+        // Case: Metadata exists, but no transcription file yet
+        render_pending_transcription($clean_uri);
+    }
     exit;
 }
 
-if (file_exists($target_file) && is_file($target_file)) {
-    render_article($clean_uri, $target_file);
-} else {
-    http_response_code(404);
-    render_404();
-}
+// Fallback: If no metadata exists at all, it's a real 404
+http_response_code(404);
+render_404();
+
 
 // ------------------------
 
@@ -97,6 +100,50 @@ function render_home() {
     include('home.php');
 }
 
+// Update this function at the bottom of index.php
 function render_404() {
-    echo "<h1>404 Not Found</h1><p>Article not found.</p>";
+    global $site_name, $publications; // Bring in globals for layout.php
+
+    // Set variables that layout.php expects
+    $title = "404 Not Found";
+    $pub_name = $site_name; 
+    $day_name = "";
+    $day_num  = "";
+    $date_str = "";
+    $photo_link = "/"; // Link back home
+    
+    // The actual error message
+    $content = "
+        <p>We are sorry, but the article or page you are looking for doesn't exist in the archive.</p>
+        <p>It may have been moved, or our digital humanities pipeline hasn't processed it yet.</p>
+    ";
+
+    include('layout.php');
+}
+
+function render_pending_transcription($uri) {
+    global $metadata, $publications;
+
+    $meta = $metadata[$uri] ?? ['title' => 'Pending Article'];
+    $parts = explode('/', $uri);
+
+    $title = $meta['title'];
+    $pub_key = $parts[0];
+    $pub_name = $publications[$pub_key] ?? ucfirst(str_replace('_', ' ', $pub_key));
+    $day_name = $meta['day_name'] ?? '';
+    $day_num  = $meta['day_num'] ?? '';
+    $date_str = ($parts[2] ?? '') . '/' . ($parts[1] ?? '');
+    
+    // Photocopy link remains the same
+    $photo_link = "/photocopy/" . $uri;
+
+    $content = "
+        <div style='background: #fff4e6; border: 1px solid #ffd8a8; padding: 1.5rem; border-radius: 4px; color: #d9480f;'>
+            <h3 style='margin-top:0;'>Transcription Pending</h3>
+            <p>The text for this article hasn't been performed yet as part of our digital humanities pipeline.</p>
+            <p>However, you can view the original newspaper clipping by clicking <strong>'View Source'</strong> above.</p>
+        </div>
+    ";
+
+    include('layout.php');
 }
