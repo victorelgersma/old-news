@@ -45,10 +45,21 @@
             <?= $content ?>
         </section>
 
-        <footer>
+        <footer class="site-footer">
             <hr>
-            <p>Digital Archive maintained by Victor Elgersma. Have you spotted a mistake? Please send an email to
-                v.j.b.elgersma@students.uu.nl</p>
+            <p>
+                Digital Archive maintained by Victor Elgersma.
+                Have you spotted a mistake?
+                <a href="mailto:v.j.b.elgersma@students.uu.nl">
+                Please send us an email. 
+                </a>.
+            </p>
+            <p>
+                View this project on
+                <a href="https://github.com/victorelgersma/old-news" target="_blank" rel="noopener noreferrer">
+                    GitHub
+                </a>
+            </p>
         </footer>
     </article>
 </body>

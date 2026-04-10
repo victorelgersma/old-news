@@ -1,23 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title><?= htmlspecialchars($site_name) ?></title>
     <link rel="stylesheet" href="https://oldnews.vjbe.net/style/tufte.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body { padding: 2rem; }
-        ul { list-style-type: none; padding: 0; }
-        li { margin-bottom: 1.5rem; }
-        .pub-tag { font-variant: small-caps; color: #666; font-size: 0.9rem; }
-        .date-tag { color: #888; font-size: 0.8rem; }
+        body {
+            padding: 2rem;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 1.5rem;
+        }
+
+        .pub-tag {
+            font-variant: small-caps;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .date-tag {
+            color: #888;
+            font-size: 0.8rem;
+        }
     </style>
 </head>
+
 <body>
     <article>
         <header>
             <h1><?= htmlspecialchars($site_name) ?></h1>
-            <p class="subtitle">A digital archive of 19th-century press and scientific controversy.</p>
+            <p class="subtitle">Public domain newspaper articles, digitally republished for a 21st century audience.</p>
         </header>
 
         <section>
@@ -35,10 +55,24 @@
             </ul>
         </section>
 
-        <footer>
+
+        <footer class="site-footer">
             <hr>
-            <p>View this project on <a href="https://github.com/victorelgersma/old-news">Github</a></p>
+            <p>
+                Digital Archive maintained by Victor Elgersma.
+                Have you spotted a mistake?
+                <a href="mailto:v.j.b.elgersma@students.uu.nl">
+                    Send an email
+                </a>.
+            </p>
+            <p>
+                View this project on
+                <a href="https://github.com/victorelgersma/old-news" target="_blank" rel="noopener noreferrer">
+                    GitHub
+                </a>
+            </p>
         </footer>
     </article>
 </body>
+
 </html>
