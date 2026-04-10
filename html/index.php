@@ -56,7 +56,8 @@ render_404();
 
 // ------------------------
 
-function render_article($uri, $full_path) {
+function render_article($uri, $full_path)
+{
     global $metadata, $publications;
 
     $meta = $metadata[$uri] ?? ['title' => basename($uri, '.html')];
@@ -68,7 +69,7 @@ function render_article($uri, $full_path) {
     $pub_key = $parts[0];
     $pub_name = $publications[$pub_key] ?? ucfirst(str_replace('_', ' ', $pub_key));
     $day_name = $meta['day_name'] ?? '';
-    $day_num  = $meta['day_num'] ?? '';
+    $day_num = $meta['day_num'] ?? '';
     $date_str = ($parts[2] ?? '') . '/' . ($parts[1] ?? '');
     $source_url = $meta['source_url'] ?? null;
 
@@ -79,7 +80,8 @@ function render_article($uri, $full_path) {
     include('layout.php');
 }
 
-function render_home() {
+function render_home()
+{
     global $site_name, $metadata, $publications;
 
     $links = [];
@@ -88,31 +90,56 @@ function render_home() {
         $pub_key = $parts[0];
 
         $links[] = [
-            'uri'   => $uri,
+            'uri' => $uri,
             'title' => $meta['title'],
-            'pub'   => $publications[$pub_key] ?? $pub_key,
-            'date'  => ($parts[2] ?? '') . '/' . ($parts[1] ?? '')
+            'pub' => $publications[$pub_key] ?? $pub_key,
+            'date' => ($parts[2] ?? '') . '/' . ($parts[1] ?? '')
         ];
     }
 
     // Sort newest-ish first (by URI descending)
-    usort($links, fn($a, $b) => strcmp($b['uri'], $a['uri']));
+    // Sort articles chronologically (oldest first)
+    // Extract date (year, month, day) from the URI for sorting
+// Sort articles chronologically (oldest first)
+// Extract date (year, month, day) from the URI for sorting
+    usort($links, function ($a, $b) {
+        // Extract date parts from URI (e.g., liverpool_mercury/1845/10/17/some-article.html)
+        preg_match('/(\d{4})\/(\d{2})\/(\d{2})/', $a['uri'], $date_a);
+        preg_match('/(\d{4})\/(\d{2})\/(\d{2})/', $b['uri'], $date_b);
 
+        // If a date is missing day/month, set them to the first of the month/year.
+        if (empty($date_a)) {
+            preg_match('/(\d{4})\/(\d{2})/', $a['uri'], $date_a);
+            $date_a[3] = '01'; // Default to 1st day of the month
+        }
+        if (empty($date_b)) {
+            preg_match('/(\d{4})\/(\d{2})/', $b['uri'], $date_b);
+            $date_b[3] = '01'; // Default to 1st day of the month
+        }
+
+        // Format the extracted date as "YYYY-MM-DD" to make string comparison correct
+        $date_a = "{$date_a[1]}-{$date_a[2]}-{$date_a[3]}"; // Format: YYYY-MM-DD
+        $date_b = "{$date_b[1]}-{$date_b[2]}-{$date_b[3]}"; // Format: YYYY-MM-DD
+
+        // Compare the dates in ascending order (oldest first)
+        return strcmp($date_a, $date_b);
+    });
     include('home.php');
 }
 
 // Update this function at the bottom of index.php
-function render_404() {
+function render_404()
+{
     global $site_name, $publications; // Bring in globals for layout.php
 
     // Set variables that layout.php expects
     $title = "404 Not Found";
-    $pub_name = $site_name; 
+    $pub_name = $site_name;
     $day_name = "";
-    $day_num  = "";
+    $day_num = "";
     $date_str = "";
     $photo_link = "/"; // Link back home
-    
+
     // The actual error message
     $content = "
         <p>We are sorry, but the article or page you are looking for doesn't exist in the archive.</p>
@@ -122,7 +149,8 @@ function render_404() {
     include('layout.php');
 }
 
-function render_pending_transcription($uri) {
+function render_pending_transcription($uri)
+{
     global $metadata, $publications;
 
     $meta = $metadata[$uri] ?? ['title' => 'Pending Article'];
@@ -132,9 +160,9 @@ function render_pending_transcription($uri) {
     $pub_key = $parts[0];
     $pub_name = $publications[$pub_key] ?? ucfirst(str_replace('_', ' ', $pub_key));
     $day_name = $meta['day_name'] ?? '';
-    $day_num  = $meta['day_num'] ?? '';
+    $day_num = $meta['day_num'] ?? '';
     $date_str = ($parts[2] ?? '') . '/' . ($parts[1] ?? '');
-    
+
     // Photocopy link remains the same
     $photo_link = "/photocopy/" . $uri;
 
