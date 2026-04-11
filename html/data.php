@@ -13,7 +13,7 @@ $publications = [
 
 $metadata = [
     'spectator/1837/07/nichol-s-architecture-of-the-heavens.html' => [
-        'title' => "DR. Nichol's Architecture of the Heavens.",
+        'title' => "Dr. Nichol's Architecture of the Heavens.",
         'summary' => "A review of Dr. Nichol's popularization of Herschel's astronomical discoveries, exploring the 'Architecture' of the Milky Way and the nebular hypothesis.",
         'day_num' => '22',
         'source_url' => "https://archive.spectator.co.uk/article/22nd-july-1837/17/dr-nichols-architecture-of-the-heavens"
@@ -49,13 +49,13 @@ $metadata = [
         "source_url" => "https://www.britishnewspaperarchive.co.uk/viewer/bl/0000435/18450517/035/0003"
     ],
     'liverpool_mercury/1845/10/readership.html' => [
-        'title' => 'MERCURY EXTRAORDINARY!',
+        'title' => 'Mercury Extraordinary!',
         'day_num' => '03',
         'day_name' => 'Friday',
         'source_url' => "https://britishnewspaperarchive.co.uk/viewer/bl/0000081/18451017/005/0001"
     ],
     'liverpool_mercury/1845/10/vestiges-sedgwick-review-of-review.html' => [
-        'title' => 'THE EDINBURGH REVIEW, AND VESTIGES OF THE NATURAL CREATION',
+        'title' => 'The Edinburgh Review, and Vestiges of the Natural History of Creation',
         'day_num' => '03',
         'day_name' => 'Friday',
         'source_url' => "https://britishnewspaperarchive.co.uk/viewer/bl/0000081/18451017/005/0001"
