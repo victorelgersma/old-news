@@ -53,7 +53,7 @@ We also closely monitor and utilize these outstanding digital repositories:
 
 Old News has been used to support the following pieces of scholarship: 
 
-- (May 2026): Victor Elgersma used articles from Old News to write about the status of the Nebular Hypothesis in the mid-19th century. You can view his article [here](https://samizdat.vjbe.net/2026-04-30-SciPub%20Research%20Essay%202.pdf)
+- (May 2026): Victor Elgersma used articles from Old News to write about the status of the Nebular Hypothesis in the mid-19th century. You can view his article [here](https://drive.vjbe.net/2026-08-06-SciPub%20Research%20Essay%202-2.pdf)
 
 ---
 
